@@ -47,7 +47,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </CardContent>
       <CardFooter>
         <Link className="w-full" href={`/shop/${product.id}`}>
-          <Button className="w-full">Book Now</Button>
+          <Button className="w-full">View product</Button>
         </Link>
       </CardFooter>
     </Card>
