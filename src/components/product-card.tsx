@@ -34,16 +34,10 @@ export function ProductCard({ product }: ProductCardProps) {
         />
       </div>
       <CardHeader>
-        <CardTitle>{product.name}</CardTitle>
-        <CardDescription>{product.description}</CardDescription>
+        <CardTitle className="text-2xl font-bold">{product.name}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex items-center gap-4 text-sm">
-          <div className="flex items-center gap-1">
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
-            <span>{product.price}</span>
-          </div>
-        </div>
+        <span>{product.price}&euro;</span>
       </CardContent>
       <CardFooter>
         <Link className="w-full" href={`/shop/${product.id}`}>

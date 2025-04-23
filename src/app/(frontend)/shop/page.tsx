@@ -1,10 +1,18 @@
+import { Suspense } from "react";
+
+import { CategorySelector } from "./_components/category-selector";
 import { ProductsGrid } from "./_components/product-grid";
 
 interface PageProps {
-  searchParams: Promise<{ categories?: string }>;
+  searchParams: { categories?: string };
 }
 
-async function Page() {
+async function Page({ searchParams }: PageProps) {
+  // For future implementation: parse category IDs from searchParams
+  const categoryIds = searchParams.categories
+    ? searchParams.categories.split(",")
+    : undefined;
+
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="mb-12 text-center">
@@ -15,7 +23,18 @@ async function Page() {
           Discover our range of premium beauty and wellness products
         </p>
       </div>
-      <ProductsGrid />
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+        <div className="md:col-span-1">
+          <div className="sticky top-24">
+            <CategorySelector />
+          </div>
+        </div>
+        <div className="md:col-span-3">
+          <Suspense fallback={<div>Loading products...</div>}>
+            <ProductsGrid categoryIds={categoryIds} />
+          </Suspense>
+        </div>
+      </div>
     </div>
   );
 }

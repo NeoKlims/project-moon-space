@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 
+import { Cart } from "@/components/cart";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -13,6 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
 export function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,11 +30,12 @@ export function NavBar() {
 
   return (
     <header
-      className={`w-full border-b transition-all duration-300 ${
+      className={cn(
+        "w-full border-b transition-all duration-300",
         isScrolled
           ? "bg-background/95 shadow-sm backdrop-blur-sm"
-          : "bg-transparent"
-      }`}
+          : "bg-transparent",
+      )}
     >
       <div className="container flex h-16 items-center justify-between px-4 md:h-24">
         <Link href="/" className="flex items-center gap-2">
@@ -52,6 +55,7 @@ export function NavBar() {
           />
         </Link>
 
+        {/* Desktop Menu */}
         <nav className="hidden items-center gap-6 md:flex">
           <Link
             href="/shop"
@@ -74,8 +78,10 @@ export function NavBar() {
           <Button asChild variant="outline">
             <Link href="/book-appointment">Book Appointment</Link>
           </Button>
+          <Cart />
         </nav>
 
+        {/* Mobile Menu */}
         <Sheet>
           <SheetTrigger asChild className="md:hidden">
             <Button variant="ghost" size="icon">
@@ -106,6 +112,7 @@ export function NavBar() {
               >
                 Contact
               </Link>
+              <Cart />
               <Button asChild>
                 <Link href="/book-appointment">Book Appointment</Link>
               </Button>
